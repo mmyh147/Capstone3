@@ -19,7 +19,7 @@ public class FieldService {
     public void addField(Integer organizer_id, Field field){
         Organizer organizer = organizerRepository.findOrganizerById(organizer_id);
         if(organizer == null){
-            throw new ApiException("organizer");
+            throw new ApiException("organizer does not exists");
         }
         field.setOrganizer(organizer);
         fieldRepository.save(field);

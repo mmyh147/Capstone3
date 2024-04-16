@@ -2,13 +2,12 @@ package com.example.capstone3.Model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor
@@ -25,6 +24,10 @@ public class Organizer {
     @Pattern(regexp = "^(05)[0-9]+$")
     @Column(columnDefinition = "VARCHAR(10) NOT NULL UNIQUE")
     private String phone;
+    @NotEmpty(message = "email should not be empty")
+    @Email(message = "please provide a valid email")
+    @Column(columnDefinition = "VARCHAR(30) NOT NULL UNIQUE")
+    private String email;
     @NotNull(message = "age should not be empty")
     @Min(value = 18,message = "minimum age should be 18")
     private Integer age;
