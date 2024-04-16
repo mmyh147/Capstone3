@@ -1,6 +1,7 @@
 package com.example.capstone3.Service;
 
 
+import com.example.capstone3.Api.ApiException;
 import com.example.capstone3.Model.Player;
 import com.example.capstone3.Repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class PlayerService {
             player.setId(playerId);
             playerRepository.save(player);
         }else{
-          //  throw new ApiException("player not found");
+            throw new ApiException("player not found");
 
         }
     }
@@ -38,7 +39,7 @@ public class PlayerService {
         if (playerRepository.existsById(id)) {
             playerRepository.deleteById(id);
         } else {
-           // throw new ApiException("player not found");
+            throw new ApiException("player not found");
         }
 
 
