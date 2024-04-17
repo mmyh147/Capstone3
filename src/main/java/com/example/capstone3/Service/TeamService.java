@@ -23,6 +23,17 @@ public class TeamService {
         return teamRepository.findAll();
     }
 
+    public Team getTeamById(Integer id){
+        Team team = teamRepository.findTeamById(id);
+        {
+            if (team == null){
+                throw new ApiException("Team not found with ID : " + id);
+            }
+                return teamRepository.findTeamById(id);
+        }
+    }
+
+
 
     public void add(Integer player_id, Team team) {
         Player player = playerRepository.findPlayerById(player_id);
@@ -99,11 +110,36 @@ public class TeamService {
             throw new ApiException("you don't have a team to leave");
         }
 
+        if (player.getTeam().getLeader().getId() == player_id){
+            throw new ApiException("You are the leader. you need to change the leader before leaving");
+        }
+
         player.setTeam(null);
         playerRepository.save(player);
 
 
 
+    }
+
+    public void changeLeader(Integer newLeader_id, Integer leader_id, Integer team_id){
+        Player newLeader = playerRepository.findPlayerById(newLeader_id);
+        if (newLeader == null){
+            throw new ApiException("new Leader not found with ID : " + newLeader_id);
+        }
+        Player leader = playerRepository.findPlayerById(leader_id);
+        if (leader == null){
+            throw new ApiException("the leader not found with ID: " + leader_id);
+        }
+        Team team = teamRepository.findTeamById(team_id);
+        if (team == null){
+            throw new ApiException("team not found with ID : "+ team_id);
+        }
+        if (team.getLeader().getId() != leader_id){
+            throw new ApiException("only leader can change the leader");
+        }
+
+        team.setLeader(newLeader);
+        teamRepository.save(team);
     }
 
 

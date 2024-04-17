@@ -27,15 +27,23 @@ public class JoinRequestService {
         return joinRequestRepository.findAll();
     }
 
+    public JoinRequest findRequestById(Integer id){
+        JoinRequest joinRequest = joinRequestRepository.findJoinRequestById(id);
+        if (joinRequest == null){
+            throw new ApiException("request not found with id: " + id);
+        }
+        return joinRequest;
+    }
     public JoinRequest sendJoinRequest(Integer player_id, Integer team_id) {
         Player player = playerRepository.findPlayerById(player_id);
         Team team = teamRepository.findTeamById(team_id);
-        if (player.getTeam() != null){
-            throw new ApiException("you need to leave your current team before join");
-        }
         if (player == null){
             throw new ApiException("player not found");
         }
+        if (player.getTeam() != null){
+            throw new ApiException("you need to leave your current team before join");
+        }
+
         if (team == null){
             throw new ApiException("team not found");
         }
@@ -45,20 +53,32 @@ public class JoinRequestService {
         request.setStatus(JoinRequest.RequestStatus.PENDING);
         return joinRequestRepository.save(request);
     }
-
-    public void acceptJoinRequest(Integer request_id, String status) {
+//add leader ID
+    public void acceptJoinRequest(Integer leaderId, Integer request_id, String status) {
         JoinRequest joinRequest = joinRequestRepository.findJoinRequestById(request_id);
+        Player leader = playerRepository.findPlayerById(leaderId);
+
+        if (leader == null){
+            throw new ApiException("leader not found");
+        }
+
 
 
         if (joinRequest == null){
             throw new ApiException("Request not found");
         }
         Player player = joinRequest.getPlayer();
-        if (player.getTeam() !=null){
-            throw new ApiException("player Already in team");
-        }
+
         Team team = joinRequest.getTeam();
+
+        if (team.getLeader().getId() != leaderId){
+            throw new ApiException("only leader can handle the request for the team");
+        }
+
         if (status.equals("ACCEPTED")){
+            if (player.getTeam() !=null){
+                throw new ApiException("player Already in team");
+            }
             joinRequest.setStatus(JoinRequest.RequestStatus.ACCEPTED);
             joinRequestRepository.save(joinRequest);
             player.setTeam(team);
@@ -66,6 +86,8 @@ public class JoinRequestService {
 
         } else if (status.equals("REJECTED")) {
             joinRequest.setStatus(JoinRequest.RequestStatus.REJECTED);
+            joinRequestRepository.save(joinRequest);
+
 
         }else{
             throw new ApiException("must be ACCEPTED or REJECTED");
@@ -94,4 +116,14 @@ public class JoinRequestService {
         }
         return joinRequestRepository.findByPlayer(player);
     }
+
+    public Set<JoinRequest> findJoinRequestsByStatusAndTeam(String status, Integer team_id) {
+        Team team = teamRepository.findTeamById(team_id);
+        if (team == null){
+            throw new ApiException("team not found");
+        }
+        return joinRequestRepository.findAllByStatusAndTeam(status, team);
+    }
+
+
 }
