@@ -38,4 +38,9 @@ public class MatchController {
         matchService.deleteMatch(id);
         return ResponseEntity.status(200).body(new ApiResponse("Match delete"));
     }
+    @GetMapping("assign/{match_id}/{firstTeam_id},{secondTeam_id}")
+    public ResponseEntity assignTeamsToMatch(@PathVariable Integer match_id, @PathVariable Integer firstTeam_id, @PathVariable Integer secondTeam_id){
+        matchService.assignTeamsToMatch(match_id, firstTeam_id, secondTeam_id);
+        return ResponseEntity.status(200).body(new ApiResponse("Assign DONE"));
+    }
 }

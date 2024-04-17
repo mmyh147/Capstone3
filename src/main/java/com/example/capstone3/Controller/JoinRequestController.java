@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/request")
 public class JoinRequestController {
 
-
-
     private final JoinRequestService joinRequestService;
     Logger logger = LoggerFactory.getLogger(TeamController.class);
 
@@ -41,8 +39,4 @@ public class JoinRequestController {
         joinRequestService.acceptJoinRequest(requestid, status);
         return ResponseEntity.ok("request updated");
     }
-
-
-
-
 }

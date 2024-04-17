@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -20,18 +21,19 @@ public class MatchModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     @NotNull(message = "StarDate should be not null")
-    private LocalDateTime StartDate;
-
-    private LocalDateTime EndDate;
+    private LocalDateTime startDate;
+    @NotNull(message = "end date should not be empty")
+    private LocalDateTime endDate;
+    @JsonIgnore
     private Integer result;
+    @JsonIgnore
     private String winner;
-    private String ListTeams;
-
     @ManyToOne
     @JoinColumn(name = "field_id ", referencedColumnName = "id")
     @JsonIgnore
     private Field field;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "matchModel")
+    private Set<Team>teams;
 }

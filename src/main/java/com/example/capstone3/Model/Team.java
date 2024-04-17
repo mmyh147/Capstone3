@@ -37,4 +37,9 @@ public class Team {
     @JsonIgnore
     private Set<JoinRequest> joinRequests;
 
+    @ManyToOne
+    @JoinColumn(name = "matchModel_id ", referencedColumnName = "id")
+    @JsonIgnore
+    private MatchModel matchModel;
+
 }
