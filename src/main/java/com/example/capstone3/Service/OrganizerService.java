@@ -1,4 +1,4 @@
-package com.example.capstone3.Serivce;
+package com.example.capstone3.Service;
 
 import com.example.capstone3.Api.ApiException;
 import com.example.capstone3.Model.Organizer;
