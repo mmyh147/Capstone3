@@ -25,7 +25,8 @@ public class FieldService {
         fieldRepository.save(field);
     }
 
-    public List<Field> getAllField(){
+    public List<Field> getAllField()
+    {
         return fieldRepository.findAll();
     }
 

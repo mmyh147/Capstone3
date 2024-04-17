@@ -13,7 +13,8 @@ import java.util.List;
 public class OrganizerService {
     private final OrganizerRepository organizerRepository;
 
-    public void addOrganizerRepository(Organizer organizer){
+    public void addOrganizerRepository(Organizer organizer)
+    {
         organizerRepository.save(organizer);
     }
 

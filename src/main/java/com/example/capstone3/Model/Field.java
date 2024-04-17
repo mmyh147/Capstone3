@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @Entity
@@ -21,4 +23,9 @@ public class Field {
     @JoinColumn(name = "organizer_id", referencedColumnName = "id")
     @JsonIgnore
     private Organizer organizer;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "field")
+    private Set<MatchModel> matches;
+
+
 }
