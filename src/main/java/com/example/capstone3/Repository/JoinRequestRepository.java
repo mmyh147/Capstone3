@@ -17,5 +17,7 @@ public interface JoinRequestRepository extends JpaRepository<JoinRequest, Intege
 
     Set<JoinRequest> findByPlayer(Player player);
 
+    Set<JoinRequest> findAllByStatusAndTeam(String status, Team team);
+
 
 }

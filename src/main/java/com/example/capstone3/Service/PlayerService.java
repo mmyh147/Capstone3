@@ -44,4 +44,12 @@ public class PlayerService {
 
 
     }
+
+    public Player getPlayerById(Integer player_id){
+        Player player = playerRepository.findPlayerById(player_id);
+        if (player == null){
+            throw new ApiException("Player with ID : " + player_id + " not found");
+        }
+        return player;
+    }
 }
