@@ -1,6 +1,7 @@
 package com.example.capstone3.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,12 @@ public class Team {
     private Set<Player> players;
 
 
+    @OneToOne
+    @JoinColumn(name = "leader_id")
+    private Player leader;
 
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private Set<JoinRequest> joinRequests;
 
 }

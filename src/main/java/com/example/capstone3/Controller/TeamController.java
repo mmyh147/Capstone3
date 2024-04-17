@@ -53,4 +53,16 @@ public class TeamController {
         teamService.delete(id);
         return ResponseEntity.status(200).body("team deleted");
     }
+
+
+    @PutMapping("leave/{player_id}")
+    public ResponseEntity leaveTeam(@PathVariable Integer player_id){
+        logger.info("leave team");
+
+        teamService.leaveTeam(player_id);
+        return ResponseEntity.status(200).body("You leaved the team");
+    }
+
+
+
 }

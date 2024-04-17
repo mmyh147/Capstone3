@@ -29,9 +29,15 @@ public class TeamService {
         if (player == null){
             throw new ApiException("player not found");
         }
-        player.setRole("Captain");
-        playerRepository.save(player);
+
+        if (player.getTeam() != null){
+            throw new ApiException("leave your current team to create new one");
+        }
+        team.setLeader(player);
+        player.setTeam(team);
         teamRepository.save(team);
+        playerRepository.save(player);
+
     }
 
     public void update(Integer teamId, Team team) {
@@ -53,4 +59,52 @@ public class TeamService {
 
 
     }
+
+    public void kickPlayer(Integer player_id, Integer leader_id, Integer team_id){
+        Player leader = playerRepository.findPlayerById(leader_id);
+        if (leader == null){
+            throw new ApiException("Leader not found");
+        }
+        Team team = teamRepository.findTeamById(team_id);
+        if (team == null){
+            throw new ApiException("team not found");
+        }
+        if (team.getLeader().getId() != leader_id){
+            throw new ApiException("only leader can kick player from the team");
+        }
+
+        Player player = playerRepository.findPlayerById(player_id);
+
+        if (player == null){
+            throw new ApiException("player not found");
+        }
+
+        if (player.getTeam().getId() != team_id){
+            throw new ApiException("the player not in team");
+        }
+
+        player.setTeam(null);
+        playerRepository.save(player);
+
+    }
+
+    public void leaveTeam(Integer player_id){
+
+        Player player = playerRepository.findPlayerById(player_id);
+
+        if (player == null){
+            throw new ApiException("player not found");
+        }
+        if (player.getTeam() == null){
+            throw new ApiException("you don't have a team to leave");
+        }
+
+        player.setTeam(null);
+        playerRepository.save(player);
+
+
+
+    }
+
+
 }

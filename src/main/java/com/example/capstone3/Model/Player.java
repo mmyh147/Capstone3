@@ -34,7 +34,6 @@ public class Player {
     @NotEmpty(message = "email must be not null")
     private String email;
 
-    private String role;
 
 
     @ManyToOne
