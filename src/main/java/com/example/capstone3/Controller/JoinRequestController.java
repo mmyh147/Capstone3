@@ -20,6 +20,7 @@ public class JoinRequestController {
     private final JoinRequestService joinRequestService;
     Logger logger = LoggerFactory.getLogger(TeamController.class);
 
+//By Mohammed Alhajri
 
     @GetMapping("get")
     public ResponseEntity getAllRequest(){
@@ -27,6 +28,7 @@ public class JoinRequestController {
 
         return ResponseEntity.ok(joinRequestService.getAll());
     }
+//By Mohammed Alhajri
 
     @GetMapping("get-by-id/{request_id}")
     public ResponseEntity getRequestById(@PathVariable Integer request_id){
@@ -34,6 +36,7 @@ public class JoinRequestController {
 
         return ResponseEntity.ok(joinRequestService.findRequestById(request_id));
     }
+//By Mohammed Alhajri
 
     @PostMapping("add/{playerid}/{teamid}")
     public ResponseEntity add(@PathVariable Integer playerid, @PathVariable Integer teamid){
@@ -41,6 +44,7 @@ public class JoinRequestController {
         joinRequestService.sendJoinRequest(playerid, teamid);
         return ResponseEntity.ok("add request");
     }
+//By Mohammed Alhajri
 
     @PutMapping("status/{leader_id}/{requestid}/{status}")
     public ResponseEntity joinTeamStatus(@PathVariable Integer leader_id, @PathVariable Integer requestid, @PathVariable String status){
@@ -49,6 +53,7 @@ public class JoinRequestController {
         return ResponseEntity.ok("request updated");
     }
 
+//By Mohammed Alhajri
 
     @GetMapping("get/all/{team_id}")
     public ResponseEntity getAllTeamRequest(@PathVariable Integer team_id){
@@ -56,6 +61,7 @@ public class JoinRequestController {
 
         return ResponseEntity.ok(joinRequestService.findJoinRequestsByTeam(team_id));
     }
+//By Mohammed Alhajri
 
     @GetMapping("get/player/{player_id}")
     public ResponseEntity getAllPlayerRequest(@PathVariable Integer player_id){
@@ -63,6 +69,7 @@ public class JoinRequestController {
 
         return ResponseEntity.ok(joinRequestService.findJoinRequestsByPlayer(player_id));
     }
+//By Mohammed Alhajri
 
     @GetMapping("stats/{team_id}/{status}")
     public ResponseEntity getRequestByStatusAndTeam(@PathVariable String status ,@PathVariable Integer team_id){
