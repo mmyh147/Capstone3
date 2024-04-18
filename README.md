@@ -6,14 +6,14 @@
 
 - **By**: Mohammed alhajri
 - **CRUD**
-- ** Endpoints**:
+- **Endpoints**:
   1. `getPlayerById`: Retrieve player information by ID.
 
 ## Team
 
 - **By**: Mohammed alhajri
 - **CRUD**
-- ** Endpoints**:
+- **Endpoints**:
   1. `getTeamById`: Retrieve team information by ID.
   2. `leaveTeam`: Remove a player from the team.
   3. `kickPlayer`: Remove a player forcefully from the team.
