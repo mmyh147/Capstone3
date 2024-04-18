@@ -53,7 +53,7 @@ public class JoinRequestService {
         request.setStatus(JoinRequest.RequestStatus.PENDING);
         return joinRequestRepository.save(request);
     }
-//add leader ID
+    //add leader ID
     public void acceptJoinRequest(Integer leaderId, Integer request_id, String status) {
         JoinRequest joinRequest = joinRequestRepository.findJoinRequestById(request_id);
         Player leader = playerRepository.findPlayerById(leaderId);

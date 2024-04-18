@@ -86,6 +86,11 @@ public class TeamController {
         return ResponseEntity.status(200).body("player with ID : " + new_leader_id + " has become leader");
     }
 
+    @GetMapping("/matches/{team_id}")
+    public ResponseEntity getTeamMatches(@PathVariable Integer team_id){
+        logger.info("requested matches by team");
+        return ResponseEntity.ok(teamService.getTeamMatches(team_id));
+    }
 
 
 }

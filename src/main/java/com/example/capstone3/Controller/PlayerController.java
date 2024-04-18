@@ -28,14 +28,14 @@ public class PlayerController {
         return ResponseEntity.ok(playerService.getAll());
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public ResponseEntity addPlayer(@RequestBody @Valid Player player){
         logger.info("add Player");
         playerService.add(player);
         return ResponseEntity.ok("player added");
     }
 
-    @PutMapping("update/{playerid}")
+    @PutMapping("/update/{playerid}")
     public ResponseEntity updatePlayer(@PathVariable Integer playerid, @RequestBody @Valid Player player){
         logger.info("update player");
 
@@ -46,7 +46,7 @@ public class PlayerController {
     }
 
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity deletePlayer(@PathVariable Integer id){
         logger.info("delete player");
 

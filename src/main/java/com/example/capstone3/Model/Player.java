@@ -3,7 +3,6 @@ package com.example.capstone3.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -26,18 +25,16 @@ public class Player {
     private String name;
     @NotNull(message = "age must not be empty")
     @Column(columnDefinition = "int not null")
-    @Min(15)
+    @Min(value = 15, message = "minimum age should be 15")
     private Integer age;
     @NotEmpty(message = "phone must be not null")
+
     @Pattern(regexp="\\d{10}", message="Phone number must be 10 digits")
     @Column(columnDefinition = "varchar(10) unique not null")
     private String phone;
-    @Email
-    @NotEmpty(message = "email must be not null unique")
-    @Column(columnDefinition = "varchar(30) unique not null")
+    @Column(columnDefinition = "varchar(30) not null unique")
+    @NotEmpty(message = "email must be not null")
     private String email;
-
-
 
     @ManyToOne
     @JoinColumn(name = "team_id", referencedColumnName = "id")

@@ -28,12 +28,10 @@ public class Organizer {
     @Email(message = "please provide a valid email")
     @Column(columnDefinition = "VARCHAR(30) NOT NULL UNIQUE")
     private String email;
-    @NotNull(message = "age should not be empty")
-    @Min(value = 18,message = "minimum age should be 18")
-    private Integer age;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "organizer")
     private Set<Field> fields;
+
+
 
 
 }

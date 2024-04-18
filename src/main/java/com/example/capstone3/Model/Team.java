@@ -28,6 +28,9 @@ public class Team {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
     private Set<Player> players;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
+    @JsonIgnore
+    private Set<JoinMatchRequest> joinMatchRequests;
 
     @OneToOne
     @JoinColumn(name = "leader_id")
@@ -37,4 +40,7 @@ public class Team {
     @JsonIgnore
     private Set<JoinRequest> joinRequests;
 
+    @ManyToMany
+    @JsonIgnore
+    private Set<MatchModel> matchModel;
 }

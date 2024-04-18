@@ -2,6 +2,7 @@ package com.example.capstone3.Service;
 
 
 import com.example.capstone3.Api.ApiException;
+import com.example.capstone3.Model.MatchModel;
 import com.example.capstone3.Model.Player;
 import com.example.capstone3.Model.Team;
 import com.example.capstone3.Repository.PlayerRepository;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -140,6 +142,14 @@ public class TeamService {
 
         team.setLeader(newLeader);
         teamRepository.save(team);
+    }
+
+    public Set<MatchModel> getTeamMatches(Integer team_id){
+        Team team = teamRepository.findTeamById(team_id);
+        if(team == null){
+            throw new ApiException("team does not exists");
+        }
+        return team.getMatchModel();
     }
 
 
