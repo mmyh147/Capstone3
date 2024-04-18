@@ -20,6 +20,7 @@ public class TeamController {
     private final TeamService teamService;
     Logger logger = LoggerFactory.getLogger(TeamController.class);
 
+//By Mohammed Alhajri
 
     @GetMapping("get")
     public ResponseEntity getAllTeam(){
@@ -27,6 +28,7 @@ public class TeamController {
 
         return ResponseEntity.ok(teamService.getAll());
     }
+//By Mohammed Alhajri
 
     @GetMapping("get-by-id/{id}")
     public ResponseEntity getTeamById(@PathVariable Integer id){
@@ -34,6 +36,7 @@ public class TeamController {
 
         return ResponseEntity.ok(teamService.getTeamById(id));
     }
+//By Mohammed Alhajri
 
     @PostMapping("add/{playerid}")
     public ResponseEntity addTeam(@PathVariable Integer playerid, @RequestBody @Valid Team team){
@@ -41,6 +44,7 @@ public class TeamController {
         teamService.add(playerid, team);
         return ResponseEntity.ok("team added");
     }
+//By Mohammed Alhajri
 
     @PutMapping("update/{teamid}")
     public ResponseEntity updatePlayer(@PathVariable Integer teamid, @RequestBody @Valid Team team){
@@ -52,6 +56,7 @@ public class TeamController {
 
     }
 
+//By Mohammed Alhajri
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity deleteTeam(@PathVariable Integer id){
@@ -61,6 +66,7 @@ public class TeamController {
         return ResponseEntity.status(200).body("team deleted");
     }
 
+//By Mohammed Alhajri
 
     @PutMapping("leave/{player_id}")
     public ResponseEntity leaveTeam(@PathVariable Integer player_id){
@@ -69,6 +75,7 @@ public class TeamController {
         teamService.leaveTeam(player_id);
         return ResponseEntity.status(200).body("You leaved the team");
     }
+//By Mohammed Alhajri
 
     @PutMapping("kick/{player_id}/{leader_id}/{team_id}")
     public ResponseEntity kickPlayer(@PathVariable Integer player_id, @PathVariable Integer leader_id, @PathVariable Integer team_id){
@@ -77,6 +84,7 @@ public class TeamController {
         teamService.kickPlayer(player_id, leader_id, team_id);
         return ResponseEntity.status(200).body("player with ID : " + player_id + " has been kicked");
     }
+//By Mohammed Alhajri
 
     @PutMapping("change/{new_leader_id}/{leader_id}/{team_id}")
     public ResponseEntity changeLeader(@PathVariable Integer new_leader_id, @PathVariable Integer leader_id, @PathVariable Integer team_id){
