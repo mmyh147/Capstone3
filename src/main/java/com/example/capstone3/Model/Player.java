@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+//By Mohammed Alhajri
 @Setter
 @Getter
 @Entity
