@@ -69,7 +69,7 @@ public class OrganizerService {
         return field.getMatches();
     }
 
-    public void addResultToMatch(Integer organizer_id, Integer match_id, String result){
+    public void addResultToMatch(Integer organizer_id, Integer match_id, String result, String winner){
         Organizer organizer = organizerRepository.findOrganizerById(organizer_id);
         if(organizer == null){
             throw new ApiException("organizer not found");
@@ -85,6 +85,8 @@ public class OrganizerService {
             throw new ApiException("you can add result after the match ends");
         }
         match.setResult(result);
+        //need to change
+        match.setWinner(winner);
         matchRepository.save(match);
     }
 

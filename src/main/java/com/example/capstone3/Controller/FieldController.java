@@ -48,24 +48,34 @@ public class FieldController {
     //need test
     @GetMapping("/field/{field_id}")
     public ResponseEntity getFieldById(@PathVariable Integer field_id){
+        logger.info("field by id");
         return ResponseEntity.ok(fieldService.getFieldById(field_id));
+    }
+
+    @GetMapping("/organizer-fields/{organizer_id}")
+    public ResponseEntity getFieldsByOrganizer(@PathVariable Integer organizer_id){
+        logger.info("fields by organizer id");
+        return ResponseEntity.ok(fieldService.getFieldsByOrganizer(organizer_id));
     }
 
     //need test
     @GetMapping("/fields-with-matches")
     public ResponseEntity getFieldWithAvailableMatches(){
+        logger.info("fields with available matches to join");
         return ResponseEntity.ok(fieldService.getFieldsWithAvailableMatches());
     }
 
     //need test
     @GetMapping("/fields-location/{keyword}")
     public ResponseEntity getFieldByLocation(@PathVariable String keyword){
+        logger.info("fields by location");
         return ResponseEntity.ok(fieldService.getFieldsByLocation(keyword));
     }
 
     //need test
     @GetMapping("/fields-without-matches/{organizer_id}")
     public ResponseEntity getFieldsWithoutMatches(@PathVariable Integer organizer_id){
+        logger.info("fields with no matches");
         return ResponseEntity.ok(fieldService.getFieldsWithNoMatches(organizer_id));
     }
 

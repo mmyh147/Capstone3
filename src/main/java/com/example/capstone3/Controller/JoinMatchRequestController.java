@@ -1,6 +1,7 @@
 package com.example.capstone3.Controller;
 
 import com.example.capstone3.Api.ApiResponse;
+import com.example.capstone3.Model.JoinMatchRequest;
 import com.example.capstone3.Service.JoinMatchRequestService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -37,5 +38,13 @@ public class JoinMatchRequestController {
         logger.info("organizer requested all join requests by match");
         return ResponseEntity.ok(joinMatchRequestService.getAllRequestsByMatchId(organizer_id,match_id));
     }
+
+    @GetMapping("/request/{request_id}")
+    public ResponseEntity<JoinMatchRequest> getJoinMatchRequestById(@PathVariable Integer request_id){
+        logger.info("get request by id");
+        return ResponseEntity.ok(joinMatchRequestService.getJoinMatchRequestById(request_id));
+    }
+
+
 
 }

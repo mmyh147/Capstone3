@@ -63,6 +63,14 @@ public class FieldService {
         return field;
     }
 
+    public List<Field> getFieldsByOrganizer(Integer organizer_id){
+        Organizer organizer = organizerRepository.findOrganizerById(organizer_id);
+        if(organizer == null){
+            throw new ApiException("organizer does not exists");
+        }
+        return fieldRepository.findFieldsByOrganizer(organizer);
+    }
+
     //get matches with available matches to join
     public List<Field> getFieldsWithAvailableMatches(){
         List<Field> fields = new ArrayList<>();
@@ -116,7 +124,7 @@ public class FieldService {
 
 
 
-    public Integer getFieldRentByDate(Integer field_id, LocalDateTime dateTime){
+    public Integer getNumberOfFieldMatchesByDate(Integer field_id, LocalDateTime dateTime){
         Field field = fieldRepository.findFieldById(field_id);
         Set<MatchModel> fieldMatches = field.getMatches();
         Integer counter = 0;
@@ -128,7 +136,7 @@ public class FieldService {
         return counter;
     }
 
-    public Integer timesFieldHasBeenRented(Integer field_id){
+    public Integer totalMatchesByField(Integer field_id){
         Field field = fieldRepository.findFieldById(field_id);
         if(field == null){
             throw new ApiException("field is not valid");

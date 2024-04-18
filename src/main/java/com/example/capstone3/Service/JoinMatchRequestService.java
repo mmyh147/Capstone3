@@ -38,6 +38,13 @@ public class JoinMatchRequestService {
         if(match == null){
             throw new ApiException("match does not exists");
         }
+        for(MatchModel tempMatch:team.getMatchModel()){
+            if(!tempMatch.getStatus().equalsIgnoreCase("finished")
+                    && match.getStartDate().isBefore(tempMatch.getEndDate())){
+                throw new ApiException("can not send join Request because of time conflict");
+            }
+        }
+
 //        if(team.getPlayers().size()!=11){
 //            throw new ApiException("your team need to have 11 players");
 //        }
@@ -46,6 +53,14 @@ public class JoinMatchRequestService {
         request.setMatchModel(match);
         request.setStatus(JoinMatchRequest.RequestStatus.PENDING);
         joinMatchRequestRepository.save(request);
+    }
+
+    public JoinMatchRequest getJoinMatchRequestById(Integer request_id){
+        JoinMatchRequest request = joinMatchRequestRepository.findJoinMatchRequestById(request_id);
+        if(request == null){
+            throw new ApiException("request not found");
+        }
+        return request;
     }
 
     public void acceptJoinMatchRequest(Integer organizer_id, Integer request_id, String status){
@@ -99,7 +114,5 @@ public class JoinMatchRequestService {
         }
         return joinMatchRequestRepository.findJoinMatchRequestsByMatchModel(match);
     }
-
-
 
 }
