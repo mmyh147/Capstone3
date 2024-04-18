@@ -28,6 +28,13 @@ public class TeamController {
         return ResponseEntity.ok(teamService.getAll());
     }
 
+    @GetMapping("get-by-id/{id}")
+    public ResponseEntity getTeamById(@PathVariable Integer id){
+        logger.info("get team by ID : " + id);
+
+        return ResponseEntity.ok(teamService.getTeamById(id));
+    }
+
     @PostMapping("add/{playerid}")
     public ResponseEntity addTeam(@PathVariable Integer playerid, @RequestBody @Valid Team team){
         logger.info("add team");
@@ -61,6 +68,22 @@ public class TeamController {
 
         teamService.leaveTeam(player_id);
         return ResponseEntity.status(200).body("You leaved the team");
+    }
+
+    @PutMapping("kick/{player_id}/{leader_id}/{team_id}")
+    public ResponseEntity kickPlayer(@PathVariable Integer player_id, @PathVariable Integer leader_id, @PathVariable Integer team_id){
+        logger.info("kick player");
+
+        teamService.kickPlayer(player_id, leader_id, team_id);
+        return ResponseEntity.status(200).body("player with ID : " + player_id + " has been kicked");
+    }
+
+    @PutMapping("change/{new_leader_id}/{leader_id}/{team_id}")
+    public ResponseEntity changeLeader(@PathVariable Integer new_leader_id, @PathVariable Integer leader_id, @PathVariable Integer team_id){
+        logger.info("change leader to player with ID : " + new_leader_id);
+
+        teamService.changeLeader(new_leader_id, leader_id, team_id);
+        return ResponseEntity.status(200).body("player with ID : " + new_leader_id + " has become leader");
     }
 
 
