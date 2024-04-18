@@ -20,6 +20,7 @@ public class PlayerController {
     private final PlayerService playerService;
     Logger logger = LoggerFactory.getLogger(PlayerController.class);
 
+//By Mohammed Alhajri
 
     @GetMapping("get")
     public ResponseEntity getAllPlayer(){
@@ -27,6 +28,7 @@ public class PlayerController {
 
         return ResponseEntity.ok(playerService.getAll());
     }
+//By Mohammed Alhajri
 
     @PostMapping("/add")
     public ResponseEntity addPlayer(@RequestBody @Valid Player player){
@@ -34,6 +36,7 @@ public class PlayerController {
         playerService.add(player);
         return ResponseEntity.ok("player added");
     }
+//By Mohammed Alhajri
 
     @PutMapping("/update/{playerid}")
     public ResponseEntity updatePlayer(@PathVariable Integer playerid, @RequestBody @Valid Player player){
@@ -45,6 +48,7 @@ public class PlayerController {
 
     }
 
+//By Mohammed Alhajri
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity deletePlayer(@PathVariable Integer id){
@@ -53,6 +57,7 @@ public class PlayerController {
         playerService.delete(id);
         return ResponseEntity.status(200).body("player deleted");
     }
+//By Mohammed Alhajri
 
     @GetMapping("get/player/{player_id}")
     public ResponseEntity getPlayerById(@PathVariable Integer player_id){
