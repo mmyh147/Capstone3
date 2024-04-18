@@ -30,7 +30,7 @@ public class JoinMatchRequestService {
             throw new ApiException("team does not exists");
         }
 
-        if(team.getLeader().equals(teamLeader)){
+        if(!team.getLeader().equals(teamLeader)){
             throw new ApiException("only a team leader can send join match request");
         }
 
