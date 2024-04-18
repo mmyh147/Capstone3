@@ -25,7 +25,7 @@
 - **CRUD**
 - **Endpoints**:
   1. `getRequestById`: Retrieve join request information by ID.
-  2. `joinTeamStatus`: Get the status of a player's join request for a team.
+  2. `joinTeamStatus`: Accept or reject the request to join.
   3. `getAllTeamRequest`: Retrieve all join requests for a specific team.
   4. `getAllPlayerRequest`: Retrieve all join requests made by a player.
   5. `getRequestByStatusAndTeam`: Retrieve join requests based on status and team.
