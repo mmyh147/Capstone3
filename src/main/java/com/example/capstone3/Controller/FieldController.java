@@ -45,4 +45,29 @@ public class FieldController {
         return ResponseEntity.ok(new ApiResponse("field deleted"));
     }
 
+    //need test
+    @GetMapping("/field/{field_id}")
+    public ResponseEntity getFieldById(@PathVariable Integer field_id){
+        return ResponseEntity.ok(fieldService.getFieldById(field_id));
+    }
+
+    //need test
+    @GetMapping("/fields-with-matches")
+    public ResponseEntity getFieldWithAvailableMatches(){
+        return ResponseEntity.ok(fieldService.getFieldsWithAvailableMatches());
+    }
+
+    //need test
+    @GetMapping("/fields-location/{keyword}")
+    public ResponseEntity getFieldByLocation(@PathVariable String keyword){
+        return ResponseEntity.ok(fieldService.getFieldsByLocation(keyword));
+    }
+
+    //need test
+    @GetMapping("/fields-without-matches/{organizer_id}")
+    public ResponseEntity getFieldsWithoutMatches(@PathVariable Integer organizer_id){
+        return ResponseEntity.ok(fieldService.getFieldsWithNoMatches(organizer_id));
+    }
+
+
 }

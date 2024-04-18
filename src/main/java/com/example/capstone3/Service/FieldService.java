@@ -2,13 +2,18 @@ package com.example.capstone3.Service;
 
 import com.example.capstone3.Api.ApiException;
 import com.example.capstone3.Model.Field;
+import com.example.capstone3.Model.MatchModel;
 import com.example.capstone3.Model.Organizer;
 import com.example.capstone3.Repository.FieldRepository;
 import com.example.capstone3.Repository.OrganizerRepository;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +41,7 @@ public class FieldService {
             throw new ApiException("field does not exists");
         }
         f.setName(field.getName());
+        f.setLocation(field.getLocation());
         f.setDimensions(field.getDimensions());
         fieldRepository.save(field);
     }
@@ -47,5 +53,86 @@ public class FieldService {
         }
 
         fieldRepository.delete(field);
+    }
+
+    public Field getFieldById(Integer field_id){
+        Field field = fieldRepository.findFieldById(field_id);
+        if(field == null){
+            throw new ApiException("field not found");
+        }
+        return field;
+    }
+
+    //get matches with available matches to join
+    public List<Field> getFieldsWithAvailableMatches(){
+        List<Field> fields = new ArrayList<>();
+        for(Field field:fieldRepository.findAll()){
+            for(MatchModel match:field.getMatches()){
+                if(match.getStatus().equals("AVAILABLE")){
+                    fields.add(field);
+                    break;
+                }
+            }
+        }
+        if(fields.isEmpty()){
+            throw new ApiException("there are no fields with available matches to join");
+        }
+        return fields;
+    }
+    public List<Field> getFieldsByLocation(String keyword){
+        List<Field> fields = new ArrayList<>();
+        for(Field field:fieldRepository.findAll()){
+            if(field.getLocation().contains(keyword)){
+                fields.add(field);
+            }
+        }
+        return fields;
+    }
+
+
+    //get all fields with no available match, helpful for an organizer to add matches to an empty fields
+    public List<Field> getFieldsWithNoMatches(Integer organizer_id){
+        Organizer organizer = organizerRepository.findOrganizerById(organizer_id);
+
+        if(organizer==null){
+            throw new ApiException("organizer not found");
+        }
+        List<Field> fields = new ArrayList<>();
+
+        for(Field field:fieldRepository.findAll()){
+            if(field.getMatches().isEmpty()){
+                fields.add(field);
+                break;
+            }
+
+            for(MatchModel match:field.getMatches()){
+                if(match.getStatus().equalsIgnoreCase("finished")){
+                    fields.add(field);
+                }
+            }
+        }
+        return fields;
+    }
+
+
+
+    public Integer getFieldRentByDate(Integer field_id, LocalDateTime dateTime){
+        Field field = fieldRepository.findFieldById(field_id);
+        Set<MatchModel> fieldMatches = field.getMatches();
+        Integer counter = 0;
+        for(MatchModel match:fieldMatches){
+            if(match.getStartDate().toLocalDate().equals(dateTime.toLocalDate())){
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    public Integer timesFieldHasBeenRented(Integer field_id){
+        Field field = fieldRepository.findFieldById(field_id);
+        if(field == null){
+            throw new ApiException("field is not valid");
+        }
+        return field.getMatches().size();
     }
 }

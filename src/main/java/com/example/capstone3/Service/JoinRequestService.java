@@ -94,4 +94,5 @@ public class JoinRequestService {
         }
         return joinRequestRepository.findByPlayer(player);
     }
+
 }

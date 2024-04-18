@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MatchRepository extends JpaRepository<MatchModel,Integer> {
     MatchModel findMatchById(Integer id);
+
+//    MatchModel findMatchModelBy
 }

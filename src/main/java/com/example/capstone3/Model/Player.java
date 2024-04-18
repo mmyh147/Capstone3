@@ -25,16 +25,14 @@ public class Player {
     private String name;
     @NotNull(message = "age must not be empty")
     @Column(columnDefinition = "int not null")
-    @Min(15)
+    @Min(value = 15, message = "minimum age should be 15")
     private Integer age;
     @NotEmpty(message = "phone must be not null")
-    @Column(columnDefinition = "varchar(10) not null")
+    @Column(columnDefinition = "varchar(10) not null unique")
     private String phone;
-    @Column(columnDefinition = "varchar(30) not null")
+    @Column(columnDefinition = "varchar(30) not null unique")
     @NotEmpty(message = "email must be not null")
     private String email;
-
-
 
     @ManyToOne
     @JoinColumn(name = "team_id", referencedColumnName = "id")

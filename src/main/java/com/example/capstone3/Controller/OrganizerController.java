@@ -45,5 +45,19 @@ public class OrganizerController {
         return ResponseEntity.ok(new ApiResponse("organizer deleted"));
     }
 
+    @PutMapping("/add-result/{organizer_id}/{match_id}/{result}")
+    public ResponseEntity addResultToMatch(@PathVariable Integer organizer_id, @PathVariable Integer match_id,
+                                           @PathVariable String result){
+
+        organizerService.addResultToMatch(organizer_id,match_id,result);
+        logger.info("organizer added result to match");
+        return ResponseEntity.ok(new ApiResponse("added result"));
+    }
+
+    @GetMapping("/matches/{organizer_id}/{field_id}")
+    public ResponseEntity getAllMatchesByField(@PathVariable Integer organizer_id, @PathVariable Integer field_id){
+        return ResponseEntity.ok(organizerService.getAllMatchesByFieldId(organizer_id, field_id));
+    }
+
 
 }

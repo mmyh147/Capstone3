@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/Match")
+@RequestMapping("/api/v1/match")
 @RequiredArgsConstructor
 public class MatchController {
     private final MatchService matchService;
@@ -21,9 +21,9 @@ public class MatchController {
         return ResponseEntity.status(200).body(matchService.getAllMatch());
     }
 
-    @PostMapping("/add/{field_id}")
-    public ResponseEntity addMatch(@PathVariable Integer field_id ,@RequestBody @Valid MatchModel matchModel){
-        matchService.addMatch(field_id, matchModel);
+    @PostMapping("/add/{organizer_id}/{field_id}")
+    public ResponseEntity addMatch(@PathVariable Integer organizer_id,@PathVariable Integer field_id ,@RequestBody @Valid MatchModel matchModel){
+        matchService.addMatch(organizer_id,field_id, matchModel);
         return ResponseEntity.status(200).body(new ApiResponse("added"));
     }
 
@@ -38,9 +38,16 @@ public class MatchController {
         matchService.deleteMatch(id);
         return ResponseEntity.status(200).body(new ApiResponse("Match delete"));
     }
-    @GetMapping("assign/{match_id}/{firstTeam_id},{secondTeam_id}")
-    public ResponseEntity assignTeamsToMatch(@PathVariable Integer match_id, @PathVariable Integer firstTeam_id, @PathVariable Integer secondTeam_id){
-        matchService.assignTeamsToMatch(match_id, firstTeam_id, secondTeam_id);
-        return ResponseEntity.status(200).body(new ApiResponse("Assign DONE"));
+
+    @GetMapping("/match/{match_id}")
+    public ResponseEntity getMatchById(@PathVariable Integer match_id){
+        return ResponseEntity.ok(matchService.findMatchById(match_id));
     }
+
+    @GetMapping("/available-matches/{field_id}")
+    public ResponseEntity getAvailableMatches(@PathVariable Integer field_id){
+        return ResponseEntity.ok(matchService.getAllAvailableMatchesByFieldId(field_id));
+    }
+
+
 }
