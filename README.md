@@ -6,6 +6,7 @@ endpints:
 
 1-getPlayerById
 
+Entity : 
 Team :  by Mohammed alhajri
 CRUD
 endpints:
