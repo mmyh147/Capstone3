@@ -29,6 +29,7 @@ public class Player {
     @Min(15)
     private Integer age;
     @NotEmpty(message = "phone must be not null")
+    @Pattern(regexp="\\d{10}", message="Phone number must be 10 digits")
     @Column(columnDefinition = "varchar(10) unique not null")
     private String phone;
     @Email
