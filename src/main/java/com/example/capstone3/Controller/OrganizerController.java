@@ -18,6 +18,7 @@ public class OrganizerController {
 
     Logger logger = LoggerFactory.getLogger(OrganizerController.class);
 
+    //khaled alkuhaily
     @PostMapping("/add")
     public ResponseEntity addOrganizer(@RequestBody @Valid Organizer organizer){
         organizerService.addOrganizerRepository(organizer);
@@ -25,12 +26,14 @@ public class OrganizerController {
         return ResponseEntity.ok(new ApiResponse("organizer added"));
     }
 
+    //khaled alkuhaily
     @GetMapping("/organizers")
     public ResponseEntity getAllOrganizers(){
         logger.info("get all organizer");
         return ResponseEntity.ok(organizerService.getAllOrganizers());
     }
 
+    //khaled alkuhaily
     @PutMapping("/update/{organizer_id}")
     public ResponseEntity updateOrganizer(@PathVariable Integer organizer_id, @RequestBody @Valid Organizer organizer){
         organizerService.updateOrganizer(organizer_id, organizer);
@@ -38,6 +41,7 @@ public class OrganizerController {
         return ResponseEntity.ok(new ApiResponse("organizer updated"));
     }
 
+    //khaled alkuhaily
     @DeleteMapping("/delete/{organizer_id}")
     public ResponseEntity deleteOrganizer(@PathVariable Integer organizer_id){
         organizerService.deleteOrganizer(organizer_id);
@@ -45,6 +49,7 @@ public class OrganizerController {
         return ResponseEntity.ok(new ApiResponse("organizer deleted"));
     }
 
+    //khaled alkuhaily
     @PutMapping("/add-result/{organizer_id}/{match_id}/{result}/{winner}")
     public ResponseEntity addResultToMatch(@PathVariable Integer organizer_id, @PathVariable Integer match_id,
                                            @PathVariable String result, @PathVariable String winner){
@@ -54,6 +59,7 @@ public class OrganizerController {
         return ResponseEntity.ok(new ApiResponse("added result"));
     }
 
+    //khaled alkuhaily
     @GetMapping("/matches/{organizer_id}/{field_id}")
     public ResponseEntity getAllMatchesByField(@PathVariable Integer organizer_id, @PathVariable Integer field_id){
         logger.info("matches by field");
