@@ -18,6 +18,7 @@ public class JoinMatchRequestController {
     Logger logger = LoggerFactory.getLogger(JoinMatchRequestController.class);
 
 
+    //khaled alkuhaily
     @PostMapping("/request-join/{team_leader_id}/{team_id}/{match_id}")
     public ResponseEntity sendJoinMatchRequest(@PathVariable Integer team_leader_id,@PathVariable Integer team_id, @PathVariable Integer match_id){
         joinMatchRequestService.sendJoinMatchRequest(team_leader_id,team_id, match_id);
@@ -25,6 +26,7 @@ public class JoinMatchRequestController {
         return ResponseEntity.ok(new ApiResponse("join match request has been sent"));
     }
 
+    //khaled alkuhaily
     @PutMapping("/accept-request/{organizer_id}/{request_id}/{status}")
     public ResponseEntity acceptJoinMatchRequest(@PathVariable Integer organizer_id, @PathVariable Integer request_id
             , @PathVariable String status){
@@ -33,12 +35,14 @@ public class JoinMatchRequestController {
         return ResponseEntity.ok(new ApiResponse("request" + status));
     }
 
+    //khaled alkuhaily
     @GetMapping("view-requests/{organizer_id}/{match_id}")
     public ResponseEntity getJoinRequestsByMatch(@PathVariable Integer organizer_id, @PathVariable Integer match_id){
         logger.info("organizer requested all join requests by match");
         return ResponseEntity.ok(joinMatchRequestService.getAllRequestsByMatchId(organizer_id,match_id));
     }
 
+    //khaled alkuhaily
     @GetMapping("/request/{request_id}")
     public ResponseEntity<JoinMatchRequest> getJoinMatchRequestById(@PathVariable Integer request_id){
         logger.info("get request by id");
