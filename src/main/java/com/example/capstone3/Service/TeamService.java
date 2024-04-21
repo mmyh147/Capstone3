@@ -35,6 +35,16 @@ public class TeamService {
         }
     }
 
+    public Integer countNumberOfTeam(Integer id){
+        Team team = teamRepository.findTeamById(id);
+        {
+            if (team == null){
+                throw new ApiException("Team not found with ID : " + id);
+            }
+            return teamRepository.findTeamById(id).getPlayers().size();
+        }
+    }
+
 
 
     public void add(Integer player_id, Team team) {
