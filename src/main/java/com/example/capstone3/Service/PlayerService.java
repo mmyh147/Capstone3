@@ -52,4 +52,8 @@ public class PlayerService {
         }
         return player;
     }
+
+     public int getPlayerCount() {
+        return (int) playerRepository.count();
+    }
 }
