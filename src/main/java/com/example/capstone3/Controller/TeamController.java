@@ -100,6 +100,10 @@ public class TeamController {
         logger.info("requested matches by team");
         return ResponseEntity.ok(teamService.getTeamMatches(team_id));
     }
-
+//By Mohammed Alhajri
+     @GetMapping("/{teamId}/playerCount")
+    public int getPlayerCountInTeam(@PathVariable Integer teamId) {
+        return teamService.countNumberOfTeam(teamId);
+    }
 
 }
