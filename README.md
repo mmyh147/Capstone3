@@ -8,8 +8,9 @@
 - **CRUD**
 - **Endpoints**:
   1. `getPlayerById`: Retrieve player information by ID.
+  2. `getPlayerCount`: get the number of all players.
 
-## Team
+## Team Entity
 
 - **By**: Mohammed alhajri
 - **CRUD**
@@ -18,8 +19,10 @@
   2. `leaveTeam`: Remove a player from the team.
   3. `kickPlayer`: Remove a player forcefully from the team.
   4. `changeLeader`: Change the team leader.
+  5. `getPlayerCountInTeam`: returns the number of players in the team.
+  6. `getTeamMatches`: get all team matches. (By Khaled alkuhaily)
 
-## JoinRequest
+## JoinRequest Entity
 
 - **By**: Mohammed alhajri
 - **CRUD**
@@ -30,7 +33,7 @@
   4. `getAllPlayerRequest`: Retrieve all join requests made by a player.
   5. `getRequestByStatusAndTeam`: Retrieve join requests based on status and team.
 
-## Field
+## Field Entity
 
 - **By**: Khaled alkuhaily
 - **CRUD**
@@ -41,7 +44,7 @@
   4. `getFieldsByLocation`: Retrieve fields by location.
   5. `getFieldsWithoutMatches`: Retrieve fields without matches scheduled.
 
-## Organizer
+## Organizer Entity
 
 - **By**: Khaled alkuhaily
 - **CRUD**
@@ -49,7 +52,7 @@
   1. `addResultToMatch`: Add a result to a match.
   2. `getAllMatchesByFieldId`: Retrieve all matches organized on a specific field.
 
-## JoinMatchRequest
+## JoinMatchRequest Entity
 
 - **By**: Khaled alkuhaily
 - **CRUD**
@@ -58,7 +61,7 @@
   2. `getJoinRequestByMatch`: Retrieve join requests for a specific match.
   3. `getRequestById`: Retrieve join request information by ID.
 
-## Match
+## Match Entity
 
 - **By**: Ahmed alharbi
 - **CRUD**
