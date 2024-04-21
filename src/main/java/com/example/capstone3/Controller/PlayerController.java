@@ -64,4 +64,11 @@ public class PlayerController {
         logger.info("get player by ID : " + player_id);
 
         return ResponseEntity.ok(playerService.getPlayerById(player_id));
-    }}
+    }
+
+    //By Mohammed Alhajri
+    @GetMapping("/count")
+    public ResponseEntity getPlayerCount() {
+        return ResponseEntity.ok(playerService.getPlayerCount());
+    }
+}
